@@ -26,7 +26,7 @@ class SetSubCommand extends SubCommand{
         if (isset($args[1])) {
             $playerName = strtolower($args[0]);
             $player = Server::getInstance()->getPlayerExact($playerName);
-            $result = $this->owner->query("SELECT gait_speed FROM gait_speed_list WHERE player_name = $playerName;")->fetchArray(SQLITE3_NUM)[0];
+            $result = $this->owner->query("SELECT gait_speed FROM gait_speed_list WHERE player_name = \"$playerName\";")->fetchArray(SQLITE3_NUM)[0];
             if (!$player == null && $result === false) {
                 $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-undefined-player'), $args[0]));
             } else {
@@ -35,17 +35,17 @@ class SetSubCommand extends SubCommand{
                         if ($result === false) { // When first query result is not exists
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
                         } else {
-                            $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = $playerName");
+                            $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = '$playerName'");
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-default'), $playerName));
                         }
                     } else {
                         if ($result === false) { // When first query result is not exists
-                            $this->owner->query("INSERT INTO gait_speed_list VALUES ($playerName, $speed);");
+                            $this->owner->query("INSERT INTO gait_speed_list VALUES (\"$playerName\", $speed);");
                         } else {
                             $this->owner->query("
                             UPDATE gait_speed_list
                                 set gait_speed = $speed
-                            WHERE player_name = $playerName;
+                            WHERE player_name = \"$playerName\";
                         ");
                         }
                         $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-set'), $playerName, $speed));
