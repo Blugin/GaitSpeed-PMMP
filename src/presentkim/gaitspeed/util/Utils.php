@@ -32,6 +32,31 @@ function listToPairs(array $list) : array{
 }
 
 /**
+ * @param string        $str
+ * @param int|null      $default = null
+ *
+ * @param \Closure|null $filter
+ *
+ * @return int|null
+ */
+function toInt(string $str, int $default = null, \Closure $filter = null) : ? int{
+    if (is_numeric($str)) {
+        $i = (int) $str;
+    } elseif (is_numeric($default)) {
+        $i = $default;
+    } else {
+        return null;
+    }
+    if (!$filter) {
+        return $i;
+    } elseif ($result = $filter($i)) {
+        return $result === -1 ? $default : $i;
+    } else {
+        return null;
+    }
+}
+
+/**
  * @param string $extensionName
  * @param null   $extensionFileName
  */
