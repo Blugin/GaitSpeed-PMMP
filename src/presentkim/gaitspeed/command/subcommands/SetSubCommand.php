@@ -59,8 +59,8 @@ class SetSubCommand extends SubCommand{
                         $this->owner->applyTo($player);
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
