@@ -69,7 +69,7 @@ class GaitSpeedMain extends PluginBase{
         $this->query("
             CREATE TABLE IF NOT EXISTS gait_speed_list (
                 player_name TEXT NOT NULL,
-                gait_speed  INT  NOT NULL CHECK(gait_speed >= 0),
+                gait_speed  INT  NOT NULL,
                 PRIMARY KEY (player_name)
             );
             COMMIT;
