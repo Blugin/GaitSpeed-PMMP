@@ -52,6 +52,10 @@ class GaitSpeedMain extends PluginBase{
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
     }
 
+    public function onDisable() : void{
+        $this->save();
+    }
+
     /**
      * @param string $query
      *
