@@ -30,7 +30,12 @@ class SetSubCommand extends SubCommand{
             if (!$player == null && $result === false) {
                 $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-undefined-player'), $args[0]));
             } else {
-                if (($speed = toInt($args[1])) !== null) {
+                $speed = toInt($args[1], null, function (int $i){
+                    return $i >= 0;
+                });
+                if ($speed === null) {
+                    $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-limit'), $args[1]));
+                } else {
                     if ($speed == ((int) $this->owner->getConfig()->get("default-speed"))) { // Are you set to default speed? I will remove data
                         if ($result === null) { // When first query result is not exists
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
@@ -53,8 +58,8 @@ class SetSubCommand extends SubCommand{
                     if (!$player == null) {
                         $this->owner->applyTo($player);
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

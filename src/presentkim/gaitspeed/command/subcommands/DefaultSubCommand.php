@@ -21,9 +21,16 @@ class DefaultSubCommand extends SubCommand{
      * @return bool
      */
     public function onCommand(CommandSender $sender, array $args) : bool{
-        if (isset($args[0]) && $default = toInt($args[0])) {
-            $this->owner->getConfig()->set("default-speed", $default);
-            $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success'), $default));
+        if (isset($args[0])) {
+            $default = toInt($args[0], null, function (int $i){
+                return $i >= 0;
+            });
+            if ($default === null) {
+                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure'), $args[0]));
+            } else {
+                $this->owner->getConfig()->set("default-speed", $default);
+                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success'), $default));
+            }
             return true;
         }
         return false;
