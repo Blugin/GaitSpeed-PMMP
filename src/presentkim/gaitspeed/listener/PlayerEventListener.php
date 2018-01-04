@@ -4,8 +4,9 @@ namespace presentkim\gaitspeed\listener;
 
 use pocketmine\entity\Attribute;
 use pocketmine\event\{
-  Listener, player\PlayerRespawnEvent
+  Listener, player\PlayerJoinEvent, player\PlayerRespawnEvent
 };
+use pocketmine\Player;
 use presentkim\gaitspeed\GaitSpeedMain as Plugin;
 
 class PlayerEventListener implements Listener{
@@ -17,18 +18,13 @@ class PlayerEventListener implements Listener{
         $this->owner = Plugin::getInstance();
     }
 
+    /** @param PlayerJoinEvent $event */
+    public function onPlayerJoinEvent(PlayerJoinEvent $event) : void{
+        $this->owner->applyTo($event->getPlayer());
+    }
+
     /** @param PlayerRespawnEvent $event */
     public function onPlayerRespawnEvent(PlayerRespawnEvent $event) : void{
-        $player = $event->getPlayer();
-        $result = $this->owner->query('SELECT gait_speed FROM gait_speed_list WHERE player_name = "' . strtolower($player->getName()) . '";')->fetchArray(SQLITE3_NUM)[0];
-        if ($result !== null) { // When query result is exists
-            $speed = ((int) $result) * 0.001;
-        } else {
-            $speed = ((int) $this->owner->getConfig()->get("default-speed")) * 0.001;
-        }
-        $player->sendMessage('$result =' . var_export($result, true));
-        $player->sendMessage('getConfig() = ' . var_export($this->owner->getConfig()->get("default-speed"), true));
-        $player->sendMessage('$speed =' . var_export($speed, true));
-        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue($speed);
+        $this->owner->applyTo($event->getPlayer());
     }
 }
