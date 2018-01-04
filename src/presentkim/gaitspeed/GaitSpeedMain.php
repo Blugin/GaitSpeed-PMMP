@@ -5,6 +5,8 @@ namespace presentkim\gaitspeed;
 use pocketmine\command\{
   CommandExecutor, PluginCommand
 };
+use pocketmine\entity\Attribute;
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use presentkim\gaitspeed\{
   listener\PlayerEventListener, command\CommandListener, util\Translation
@@ -136,5 +138,18 @@ class GaitSpeedMain extends PluginBase{
 
         $this->getServer()->getCommandMap()->register($fallback, $command);
         $this->commands[] = $command;
+    }
+
+    /**
+     * @param Player $player
+     */
+    public function applyTo(Player $player) : void{
+        $result = $this->query('SELECT gait_speed FROM gait_speed_list WHERE player_name = "' . strtolower($player->getName()) . '";')->fetchArray(SQLITE3_NUM)[0];
+        if ($result !== null) { // When query result is exists
+            $speed = ((int) $result) * 0.001;
+        } else {
+            $speed = ((int) $this->getConfig()->get("default-speed")) * 0.001;
+        }
+        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue($speed);
     }
 }
