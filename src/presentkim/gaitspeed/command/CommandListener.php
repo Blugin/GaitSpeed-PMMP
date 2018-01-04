@@ -9,7 +9,7 @@ use pocketmine\command\{
 };
 use presentkim\gaitspeed\GaitSpeedMain as Plugin;
 use presentkim\gaitspeed\command\subcommands\{
-  DefaultSubCommand, SetSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
+  DefaultSubCommand, SetSubCommand, ListSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
 
 class CommandListener implements CommandExecutor{
@@ -29,6 +29,7 @@ class CommandListener implements CommandExecutor{
         $this->subcommands = [
           new DefaultSubCommand($this->owner),
           new SetSubCommand($this->owner),
+          new ListSubCommand($this->owner),
           new LangSubCommand($this->owner),
           new ReloadSubCommand($this->owner),
           new SaveSubCommand($this->owner),
