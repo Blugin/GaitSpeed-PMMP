@@ -26,6 +26,9 @@ class PlayerEventListener implements Listener{
         } else {
             $speed = ((int) $this->owner->getConfig()->get("default-speed")) * 0.001;
         }
+        $player->sendMessage('$result =' . var_export($result, true));
+        $player->sendMessage('getConfig() = ' . var_export($this->owner->getConfig()->get("default-speed"), true));
+        $player->sendMessage('$speed =' . var_export($speed, true));
         $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue($speed);
     }
 }
