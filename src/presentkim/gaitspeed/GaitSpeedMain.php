@@ -7,7 +7,7 @@ use pocketmine\command\{
 };
 use pocketmine\plugin\PluginBase;
 use presentkim\gaitspeed\{
-  command\CommandListener, util\Translation
+  listener\PlayerEventListener, command\CommandListener, util\Translation
 };
 use function presentkim\gaitspeed\util\extensionLoad;
 
@@ -45,6 +45,9 @@ class GaitSpeedMain extends PluginBase{
 
     public function onEnable() : void{
         $this->load();
+
+        // register event listeners
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
     }
 
     /**
@@ -65,8 +68,8 @@ class GaitSpeedMain extends PluginBase{
         // load db
         $this->query("
             CREATE TABLE IF NOT EXISTS gait_speed_list (
-                player_name TEXT  NOT NULL,
-                gait_speed  INT   NOT NULL CHECK(gait_speed >= 0),
+                player_name TEXT NOT NULL,
+                gait_speed  INT  NOT NULL CHECK(gait_speed >= 0),
                 PRIMARY KEY (player_name)
             );
             COMMIT;
