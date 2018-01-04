@@ -1,0 +1,30 @@
+---
+name:             GaitSpeed
+main:             presentkim\gaitspeed\GaitSpeedMain
+version:          0.0.1
+api:              [3.0.0, 3.0.0-ALPHA10]
+author:           PresentKim
+
+permissions:
+  gaitspeed.cmd:
+    description:  GaitSpeed main command
+    default:      op
+  gaitspeed.default.cmd:
+    description:  GaitSpeed default command
+    default:      op
+  gaitspeed.set.cmd:
+    description:  GaitSpeed set command
+    default:      op
+  gaitspeed.list.cmd:
+    description:  GaitSpeed list command
+    default:      op
+  gaitspeed.lang.cmd:
+    description:  GaitSpeed lang command
+    default:      op
+  gaitspeed.reload.cmd:
+    description:  GaitSpeed reload command
+    default:      op
+  gaitspeed.save.cmd:
+    description:  GaitSpeed save command
+    default:      op
+...
