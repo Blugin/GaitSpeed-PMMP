@@ -24,7 +24,7 @@ command-gaitspeed-set@aliases: ["s"]
 command-gaitspeed-list: "list"
 command-gaitspeed-list@usage: "/GaitSpeed List <Page>"
 command-gaitspeed-list@head: "--- Showing speed modifed player list (page {%0} of {%1}) ---"
-command-gaitspeed-list@item: "    {%0}:{%1} => '{%2}'"
+command-gaitspeed-list@item: "    {%0} => {%1}"
 command-gaitspeed-list@aliases: ["l"]
 
 command-gaitspeed-lang: "lang"
