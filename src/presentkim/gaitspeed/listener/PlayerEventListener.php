@@ -2,11 +2,9 @@
 
 namespace presentkim\gaitspeed\listener;
 
-use pocketmine\entity\Attribute;
 use pocketmine\event\{
   Listener, player\PlayerJoinEvent, player\PlayerRespawnEvent
 };
-use pocketmine\Player;
 use presentkim\gaitspeed\GaitSpeedMain as Plugin;
 
 class PlayerEventListener implements Listener{
