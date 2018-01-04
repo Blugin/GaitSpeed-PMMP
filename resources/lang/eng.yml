@@ -17,7 +17,8 @@ command-gaitspeed-set: "set"
 command-gaitspeed-set@usage: "/GaitSpeed Set <player name> <speed percent>"
 command-gaitspeed-set@success-set: "You have successfully set up a speed of {%0} to {%1}"
 command-gaitspeed-set@success-default: "You have successfully remove speed setting of {%0} (default is remove)"
-command-gaitspeed-set@failure: "{%0} is undefined player name"
+command-gaitspeed-set@failure-undefined-player: "{%0} is undefined player name"
+command-gaitspeed-set@failure-default: "{%0} is default value, You can't set to the same value as the default value."
 command-gaitspeed-set@aliases: ["s"]
 
 command-gaitspeed-list: "list"

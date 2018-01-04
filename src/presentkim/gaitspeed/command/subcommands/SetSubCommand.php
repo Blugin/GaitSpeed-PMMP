@@ -28,12 +28,16 @@ class SetSubCommand extends SubCommand{
             $player = Server::getInstance()->getPlayerExact($playerName);
             $result = $this->owner->query("SELECT gait_speed FROM gait_speed_list WHERE player_name = $playerName;")->fetchArray(SQLITE3_NUM)[0];
             if (!$player == null && $result === false) {
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure'), $args[0]));
+                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-undefined-player'), $args[0]));
             } else {
                 if (($speed = toInt($args[1])) !== null) {
                     if ($speed == ((int) $this->owner->getConfig()->get("default-speed"))) { // Are you set to default speed? I will remove data
-                        $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = $playerName");
-                        $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-default'), $playerName));
+                        if ($result === false) { // When first query result is not exists
+                            $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
+                        } else {
+                            $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = $playerName");
+                            $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-default'), $playerName));
+                        }
                     } else {
                         if ($result === false) { // When first query result is not exists
                             $this->owner->query("INSERT INTO gait_speed_list VALUES ($playerName, $speed);");
