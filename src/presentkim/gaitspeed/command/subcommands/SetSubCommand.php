@@ -50,6 +50,9 @@ class SetSubCommand extends SubCommand{
                         }
                         $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-set'), $playerName, $speed));
                     }
+                    if (!$player == null) {
+                        $this->owner->applyTo($player);
+                    }
                     return true;
                 }
             }
