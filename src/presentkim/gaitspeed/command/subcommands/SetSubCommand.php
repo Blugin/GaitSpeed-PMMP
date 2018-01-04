@@ -32,14 +32,14 @@ class SetSubCommand extends SubCommand{
             } else {
                 if (($speed = toInt($args[1])) !== null) {
                     if ($speed == ((int) $this->owner->getConfig()->get("default-speed"))) { // Are you set to default speed? I will remove data
-                        if ($result === false) { // When first query result is not exists
+                        if ($result === null) { // When first query result is not exists
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
                         } else {
                             $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = '$playerName'");
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-default'), $playerName));
                         }
                     } else {
-                        if ($result === false) { // When first query result is not exists
+                        if ($result === null) { // When first query result is not exists
                             $this->owner->query("INSERT INTO gait_speed_list VALUES (\"$playerName\", $speed);");
                         } else {
                             $this->owner->query("
