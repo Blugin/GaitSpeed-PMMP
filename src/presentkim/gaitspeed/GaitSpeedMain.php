@@ -36,15 +36,15 @@ class GaitSpeedMain extends PluginBase{
 
             // load utils
             $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
-
-            // init data.sqlite3
-            extensionLoad('sqlite3');
-            $dataFolder = $this->getDataFolder();
-            if (!file_exists($dataFolder)) {
-                mkdir($dataFolder, 0777, true);
-            }
-            $this->db = new \SQLITE3($dataFolder . 'data.sqlite3');
         }
+
+        // init data.sqlite3
+        extensionLoad('sqlite3');
+        $dataFolder = $this->getDataFolder();
+        if (!file_exists($dataFolder)) {
+            mkdir($dataFolder, 0777, true);
+        }
+        $this->db = new \SQLITE3($dataFolder . 'data.sqlite3');
     }
 
     public function onEnable() : void{
