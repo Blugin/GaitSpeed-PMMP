@@ -16,7 +16,7 @@ class PlayerEventListener implements Listener{
      * Array for apply speed after PlayerRespawnEvent
      * Because PMMP remove effect after PlayerRespawnEvent called....
      *
-     * @var \pocketmine\item\Item[] array[string => \pocketmine\item\Item]
+     * @var array array[string => true]
      */
     private $apply = [];
 
