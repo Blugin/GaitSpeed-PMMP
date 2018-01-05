@@ -30,19 +30,21 @@ class GaitSpeedMain extends PluginBase{
     }
 
     public function onLoad() : void{
-        // register instance
-        self::$instance = $this;
+        if (self::$instance === null) {
+            // register instance
+            self::$instance = $this;
 
-        // load utils
-        $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
+            // load utils
+            $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
 
-        // init data.sqlite3
-        extensionLoad('sqlite3');
-        $dataFolder = $this->getDataFolder();
-        if (!file_exists($dataFolder)) {
-            mkdir($dataFolder, 0777, true);
+            // init data.sqlite3
+            extensionLoad('sqlite3');
+            $dataFolder = $this->getDataFolder();
+            if (!file_exists($dataFolder)) {
+                mkdir($dataFolder, 0777, true);
+            }
+            $this->db = new \SQLITE3($dataFolder . 'data.sqlite3');
         }
-        $this->db = new \SQLITE3($dataFolder . 'data.sqlite3');
     }
 
     public function onEnable() : void{
