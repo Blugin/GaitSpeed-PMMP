@@ -143,12 +143,7 @@ class GaitSpeedMain extends PluginBase{
      * @param Player $player
      */
     public function applyTo(Player $player){
-        $result = $this->query('SELECT gait_speed FROM gait_speed_list WHERE player_name = "' . strtolower($player->getName()) . '";')->fetchArray(SQLITE3_NUM)[0];
-        if ($result !== null) { // When query result is exists
-            $speed = ((int) $result) * 0.001;
-        } else {
-            $speed = ((int) $this->getConfig()->get("default-speed")) * 0.001;
-        }
-        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue($speed);
+        $configData = $this->getConfig()->getAll();
+        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue(($configData['playerData'][$player->getLowerCaseName()] ?? $configData['default-speed']) * 0.001);
     }
 }
