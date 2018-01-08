@@ -25,11 +25,11 @@ class GaitSpeedMain extends PluginBase{
     private $commands = [];
 
     /** @return self */
-    public static function getInstance() : self{
+    public static function getInstance(){
         return self::$instance;
     }
 
-    public function onLoad() : void{
+    public function onLoad(){
         if (self::$instance === null) {
             // register instance
             self::$instance = $this;
@@ -47,14 +47,14 @@ class GaitSpeedMain extends PluginBase{
         $this->db = new \SQLITE3($dataFolder . 'data.sqlite3');
     }
 
-    public function onEnable() : void{
+    public function onEnable(){
         $this->load();
 
         // register event listeners
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
     }
 
-    public function onDisable() : void{
+    public function onDisable(){
         $this->save();
     }
 
@@ -63,11 +63,11 @@ class GaitSpeedMain extends PluginBase{
      *
      * @return \SQLite3Result
      */
-    public function query(string $query) : \SQLite3Result{
+    public function query(string $query){
         return $this->db->query($query);
     }
 
-    public function load() : void{
+    public function load(){
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
@@ -104,7 +104,7 @@ class GaitSpeedMain extends PluginBase{
         $this->registerCommand(new CommandListener($this), Translation::translate('command-gaitspeed'), 'GaitSpeed', 'gaitspeed.cmd', Translation::translate('command-gaitspeed@description'), Translation::translate('command-gaitspeed@usage'), Translation::getArray('command-gaitspeed@aliases'));
     }
 
-    public function save() : void{
+    public function save(){
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
@@ -132,7 +132,7 @@ class GaitSpeedMain extends PluginBase{
      * @param null            $usageMessage
      * @param array|null      $aliases
      */
-    private function registerCommand(CommandExecutor $executor, $name, $fallback, $permission, $description = "", $usageMessage = null, array $aliases = null) : void{
+    private function registerCommand(CommandExecutor $executor, $name, $fallback, $permission, $description = "", $usageMessage = null, array $aliases = null){
         $command = new PluginCommand($name, $this);
         $command->setExecutor($executor);
         $command->setPermission($permission);
@@ -149,7 +149,7 @@ class GaitSpeedMain extends PluginBase{
     /**
      * @param Player $player
      */
-    public function applyTo(Player $player) : void{
+    public function applyTo(Player $player){
         $result = $this->query('SELECT gait_speed FROM gait_speed_list WHERE player_name = "' . strtolower($player->getName()) . '";')->fetchArray(SQLITE3_NUM)[0];
         if ($result !== null) { // When query result is exists
             $speed = ((int) $result) * 0.001;
