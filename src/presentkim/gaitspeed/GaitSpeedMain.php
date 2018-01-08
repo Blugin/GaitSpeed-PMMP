@@ -54,7 +54,7 @@ class GaitSpeedMain extends PluginBase{
                 $config->set('playerData', $playerData);
                 $this->saveConfig();
                 unset($db, $results, $result);
-                //unlink($sqlite3Path);
+                unlink($sqlite3Path);
             }
         }
     }
