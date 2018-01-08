@@ -70,31 +70,12 @@ class GaitSpeedMain extends PluginBase{
         $this->save();
     }
 
-    /**
-     * @param string $query
-     *
-     * @return \SQLite3Result
-     */
-    public function query(string $query){
-        return $this->db->query($query);
-    }
-
     public function load(){
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
         }
 
-        // load db
-        $this->query("
-            CREATE TABLE IF NOT EXISTS gait_speed_list (
-                player_name TEXT NOT NULL,
-                gait_speed  INT  NOT NULL CHECK(gait_speed >= 0),
-                PRIMARY KEY (player_name)
-            );
-            COMMIT;
-        ");
-        $this->saveDefaultConfig();
         $this->reloadConfig();
 
         // load lang
