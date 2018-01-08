@@ -3,6 +3,7 @@
 namespace presentkim\gaitspeed\command\subcommands;
 
 use pocketmine\command\CommandSender;
+use pocketmine\Server;
 use presentkim\gaitspeed\{
   GaitSpeedMain as Plugin, util\Translation, command\SubCommand
 };
@@ -22,10 +23,13 @@ class ListSubCommand extends SubCommand{
      */
     public function onCommand(CommandSender $sender, array $args){
         $list = [];
-        $results = $this->owner->query("SELECT * FROM gait_speed_list ORDER BY player_name ASC");
-        while ($row = $results->fetchArray(SQLITE3_NUM)) {
-            $list[] = $row;
+        foreach ($this->owner->getConfig()->get('playerData') as $key => $value) {
+            if (($player = Server::getInstance()->getPlayerExact($key)) !== null) {
+                $key = $player->getName();
+            }
+            $list[] = [$key, $value];
         }
+
         $max = ceil(sizeof($list) / 5);
         $page = min($max, (isset($args[0]) ? toInt($args[0], 1, function (int $i){
               return $i > 0 ? 1 : -1;

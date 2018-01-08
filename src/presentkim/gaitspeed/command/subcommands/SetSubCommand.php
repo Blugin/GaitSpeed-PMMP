@@ -26,8 +26,10 @@ class SetSubCommand extends SubCommand{
         if (isset($args[1])) {
             $playerName = strtolower($args[0]);
             $player = Server::getInstance()->getPlayerExact($playerName);
-            $result = $this->owner->query("SELECT gait_speed FROM gait_speed_list WHERE player_name = \"$playerName\";")->fetchArray(SQLITE3_NUM)[0];
-            if ($player === null && $result === null) {
+            $configData = $this->owner->getConfig()->getAll();
+            $playerData = $configData['playerData'];
+            $exists = isset($playerData[$playerName]);
+            if ($player === null && !$exists) {
                 $sender->sendMessage($this->prefix . Translation::translate('command-generic-failure@invalid-player', $args[0]));
             } else {
                 $speed = toInt($args[1], null, function (int $i){
@@ -36,23 +38,17 @@ class SetSubCommand extends SubCommand{
                 if ($speed === null) {
                     $sender->sendMessage($this->prefix . Translation::translate('command-generic-failure@invalid', $args[1]));
                 } else {
-                    if ($speed == ((int) $this->owner->getConfig()->get("default-speed"))) { // Are you set to default speed? I will remove data
-                        if ($result === null) { // When first query result is not exists
-                            $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
-                        } else {
-                            $this->owner->query("DELETE FROM gait_speed_list WHERE player_name = '$playerName'");
+                    if ($speed == ((int) $configData['default-speed'])) {
+                        if ($exists) {
+                            unset($playerData[$playerName]);
+                            $this->owner->getConfig()->set('playerData', $playerData);
                             $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-default'), $playerName));
+                        } else {
+                            $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure-default'), $args[0]));
                         }
                     } else {
-                        if ($result === null) { // When first query result is not exists
-                            $this->owner->query("INSERT INTO gait_speed_list VALUES (\"$playerName\", $speed);");
-                        } else {
-                            $this->owner->query("
-                            UPDATE gait_speed_list
-                                set gait_speed = $speed
-                            WHERE player_name = \"$playerName\";
-                        ");
-                        }
+                        $playerData[$playerName] = $speed;
+                        $this->owner->getConfig()->set('playerData', $playerData);
                         $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success-set'), $playerName, $speed));
                     }
                     if (!$player == null) {
