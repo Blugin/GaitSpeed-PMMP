@@ -34,12 +34,10 @@ class ListSubCommand extends SubCommand{
         $page = min($max, (isset($args[0]) ? toInt($args[0], 1, function (int $i){
               return $i > 0 ? 1 : -1;
           }) : 1) - 1);
-        $message = Translation::translate($this->getFullId('head'), $page + 1, $max);
+        $sender->sendMessage(Translation::translate($this->getFullId('head'), $page + 1, $max));
         for ($i = $page * 5; $i < ($page + 1) * 5 && $i < count($list); $i++) {
-            $message .= PHP_EOL . Translation::translate($this->getFullId('item'), ...$list[$i]);
+            $sender->sendMessage(Translation::translate($this->getFullId('item'), ...$list[$i]));
         }
-        $sender->sendMessage("$this->prefix$message");
-
         return true;
     }
 }
