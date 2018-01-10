@@ -8,7 +8,6 @@ use presentkim\gaitspeed\{
   GaitSpeedMain as Plugin, util\Translation, command\SubCommand
 };
 use function presentkim\gaitspeed\util\toInt;
-use function strtolower;
 
 class SetSubCommand extends SubCommand{
 
