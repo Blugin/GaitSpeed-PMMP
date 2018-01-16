@@ -2,14 +2,14 @@
 
 namespace presentkim\gaitspeed;
 
-use pocketmine\command\{
-  CommandExecutor, PluginCommand
-};
 use pocketmine\entity\Attribute;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use presentkim\gaitspeed\{
-  listener\PlayerEventListener, command\CommandListener, util\Translation
+use presentkim\gaitspeed\util\Translation;
+use presentkim\gaitspeed\listener\PlayerEventListener;
+use presentkim\gaitspeed\command\PoolCommand;
+use presentkim\gaitspeed\command\subcommands\{
+  DefaultSubCommand, SetSubCommand, ListSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
 
 class GaitSpeedMain extends PluginBase{
@@ -17,8 +17,8 @@ class GaitSpeedMain extends PluginBase{
     /** @var self */
     private static $instance = null;
 
-    /** @var PluginCommand[] */
-    private $commands = [];
+    /** @var PoolCommand */
+    private $command;
 
     /** @return self */
     public static function getInstance(){
@@ -60,11 +60,7 @@ class GaitSpeedMain extends PluginBase{
             Translation::load($langfilename);
         }
 
-        foreach ($this->commands as $command) {
-            $this->getServer()->getCommandMap()->unregister($command);
-        }
-        $this->commands = [];
-        $this->registerCommand(new CommandListener($this), Translation::translate('command-gaitspeed'), 'GaitSpeed', 'gaitspeed.cmd', Translation::translate('command-gaitspeed@description'), Translation::translate('command-gaitspeed@usage'), Translation::getArray('command-gaitspeed@aliases'));
+        $this->reloadCommand();
     }
 
     public function save(){
@@ -76,27 +72,22 @@ class GaitSpeedMain extends PluginBase{
         $this->saveConfig();
     }
 
-    /**
-     * @param CommandExecutor $executor
-     * @param                 $name
-     * @param                 $fallback
-     * @param                 $permission
-     * @param string          $description
-     * @param null            $usageMessage
-     * @param array|null      $aliases
-     */
-    private function registerCommand(CommandExecutor $executor, $name, $fallback, $permission, $description = "", $usageMessage = null, array $aliases = null){
-        $command = new PluginCommand($name, $this);
-        $command->setExecutor($executor);
-        $command->setPermission($permission);
-        $command->setDescription($description);
-        $command->setUsage($usageMessage ?? ('/' . $name));
-        if (is_array($aliases)) {
-            $command->setAliases($aliases);
+    public function reloadCommand(){
+        if ($this->command == null) {
+            $this->command = new PoolCommand($this, 'gaitspeed');
+            $this->command->createSubCommand(DefaultSubCommand::class);
+            $this->command->createSubCommand(SetSubCommand::class);
+            $this->command->createSubCommand(ListSubCommand::class);
+            $this->command->createSubCommand(LangSubCommand::class);
+            $this->command->createSubCommand(ReloadSubCommand::class);
+            $this->command->createSubCommand(SaveSubCommand::class);
         }
-
-        $this->getServer()->getCommandMap()->register($fallback, $command);
-        $this->commands[] = $command;
+        $this->command->updateTranslation();
+        $this->command->updateSudCommandTranslation();
+        if ($this->command->isRegistered()) {
+            $this->getServer()->getCommandMap()->unregister($this->command);
+        }
+        $this->getServer()->getCommandMap()->register(strtolower($this->getName()), $this->command);
     }
 
     /**
