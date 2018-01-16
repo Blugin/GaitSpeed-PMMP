@@ -28,7 +28,7 @@ class DefaultSubCommand extends SubCommand{
             if ($default === null) {
                 $sender->sendMessage(Plugin::$prefix . Translation::translate('command-generic-failure@invalid', $args[0]));
             } else {
-                $this->owner->getConfig()->set('default-speed', $default);
+                $this->plugin->getConfig()->set('default-speed', $default);
                 $sender->sendMessage(Plugin::$prefix . $this->translate('success', $default));
             }
             return true;

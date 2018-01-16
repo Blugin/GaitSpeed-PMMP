@@ -23,7 +23,7 @@ class ListSubCommand extends SubCommand{
      */
     public function onCommand(CommandSender $sender, array $args){
         $list = [];
-        foreach ($this->owner->getConfig()->get('playerData') as $key => $value) {
+        foreach ($this->plugin->getConfig()->get('playerData') as $key => $value) {
             if (($player = Server::getInstance()->getPlayerExact($key)) !== null) {
                 $key = $player->getName();
             }

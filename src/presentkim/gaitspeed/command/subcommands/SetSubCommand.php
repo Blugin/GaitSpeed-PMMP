@@ -25,7 +25,7 @@ class SetSubCommand extends SubCommand{
         if (isset($args[1])) {
             $playerName = strtolower($args[0]);
             $player = Server::getInstance()->getPlayerExact($playerName);
-            $configData = $this->owner->getConfig()->getAll();
+            $configData = $this->plugin->getConfig()->getAll();
             $playerData = $configData['playerData'];
             $exists = isset($playerData[$playerName]);
             if ($player === null && !$exists) {
@@ -40,18 +40,18 @@ class SetSubCommand extends SubCommand{
                     if ($speed == ((int) $configData['default-speed'])) {
                         if ($exists) {
                             unset($playerData[$playerName]);
-                            $this->owner->getConfig()->set('playerData', $playerData);
+                            $this->plugin->getConfig()->set('playerData', $playerData);
                             $sender->sendMessage(Plugin::$prefix . $this->translate('success-default', $playerName));
                         } else {
                             $sender->sendMessage(Plugin::$prefix . $this->translate('failure-default', $args[0]));
                         }
                     } else {
                         $playerData[$playerName] = $speed;
-                        $this->owner->getConfig()->set('playerData', $playerData);
+                        $this->plugin->getConfig()->set('playerData', $playerData);
                         $sender->sendMessage(Plugin::$prefix . $this->translate('success-set', $playerName, $speed));
                     }
                     if (!$player == null) {
-                        $this->owner->applyTo($player);
+                        $this->plugin->applyTo($player);
                     }
                 }
             }
