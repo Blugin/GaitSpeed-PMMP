@@ -4,19 +4,19 @@ namespace presentkim\gaitspeed\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\gaitspeed\{
-  GaitSpeedMain as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, GaitSpeedMain as Plugin, util\Translation, command\SubCommand
 };
 use function presentkim\gaitspeed\util\toInt;
 
 class DefaultSubCommand extends SubCommand{
 
-    public function __construct(Plugin $owner){
-        parent::__construct($owner, Translation::translate('prefix'), 'command-gaitspeed-default', 'gaitspeed.default.cmd');
+    public function __construct(PoolCommand $owner){
+        parent::__construct($owner, 'default');
     }
 
     /**
      * @param CommandSender $sender
-     * @param array         $args
+     * @param String[]      $args
      *
      * @return bool
      */
@@ -26,10 +26,10 @@ class DefaultSubCommand extends SubCommand{
                 return $i >= 0;
             });
             if ($default === null) {
-                $sender->sendMessage($this->prefix . Translation::translate('command-generic-failure@invalid', $args[0]));
+                $sender->sendMessage(Plugin::$prefix . Translation::translate('command-generic-failure@invalid', $args[0]));
             } else {
                 $this->owner->getConfig()->set('default-speed', $default);
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success'), $default));
+                $sender->sendMessage(Plugin::$prefix . $this->translate('success', $default));
             }
             return true;
         }

@@ -5,19 +5,19 @@ namespace presentkim\gaitspeed\command\subcommands;
 use pocketmine\command\CommandSender;
 use pocketmine\Server;
 use presentkim\gaitspeed\{
-  GaitSpeedMain as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, GaitSpeedMain as Plugin, command\SubCommand
 };
 use function presentkim\gaitspeed\util\toInt;
 
 class ListSubCommand extends SubCommand{
 
-    public function __construct(Plugin $owner){
-        parent::__construct($owner, Translation::translate('prefix'), 'command-gaitspeed-list', 'gaitspeed.list.cmd');
+    public function __construct(PoolCommand $owner){
+        parent::__construct($owner, 'list');
     }
 
     /**
      * @param CommandSender $sender
-     * @param array         $args
+     * @param String[]      $args
      *
      * @return bool
      */
@@ -34,9 +34,9 @@ class ListSubCommand extends SubCommand{
         $page = min($max, (isset($args[0]) ? toInt($args[0], 1, function (int $i){
               return $i > 0 ? 1 : -1;
           }) : 1) - 1);
-        $sender->sendMessage(Translation::translate($this->getFullId('head'), $page + 1, $max));
+        $sender->sendMessage(Plugin::$prefix . $this->translate('head', $page + 1, $max));
         for ($i = $page * 5; $i < ($page + 1) * 5 && $i < count($list); $i++) {
-            $sender->sendMessage(Translation::translate($this->getFullId('item'), ...$list[$i]));
+            $sender->sendMessage($this->translate('item', ...$list[$i]));
         }
         return true;
     }
