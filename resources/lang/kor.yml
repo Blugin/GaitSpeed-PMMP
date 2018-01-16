@@ -3,7 +3,7 @@ prefix: "[GaitSpeed] "
 
 command-generic-failure@permission : "당신은 이 명령어를 사용할 권한이 없습니다"
 command-generic-failure@invalid : "{%0}는 잘못된 값입니다"
-command-generic-failure@invalid-player: "{%0}는 잘못된 플레이어 명입니다."
+command-generic-failure@invalid-player: "{%0}는 잘못된 플레이어 명입니다"
 
 command-gaitspeed: "gaitspeed"
 command-gaitspeed@usage: "/gaitspeed <set | default | list | lang | reload | save>"
@@ -17,8 +17,8 @@ command-gaitspeed-default@aliases: ["d"]
 
 command-gaitspeed-set: "set"
 command-gaitspeed-set@usage: "/gaitspeed Set <플레이어명> <속도 퍼센트>"
-command-gaitspeed-set@success-set: "{%0}님의 스피드가 {%1}로 설정되었습니다."
-command-gaitspeed-set@success-default: "{%0}님의 스피드 설정이 제거되었습니다."
+command-gaitspeed-set@success-set: "{%0}님의 스피드가 {%1}로 설정되었습니다"
+command-gaitspeed-set@success-default: "{%0}님의 스피드 설정이 제거되었습니다"
 command-gaitspeed-set@failure-default: "{%0}는 기본값입니다"
 command-gaitspeed-set@aliases: ["s"]
 
@@ -30,17 +30,17 @@ command-gaitspeed-list@aliases: ["l"]
 
 command-gaitspeed-lang: "lang"
 command-gaitspeed-lang@usage: "/gaitspeed Lang <언어명>"
-command-gaitspeed-lang@success: "{%0}언어 파일을 불러왔습니다."
-command-gaitspeed-lang@failure: "{%0}는 잘못된 언어명입니다."
+command-gaitspeed-lang@success: "{%0}언어 파일을 불러왔습니다"
+command-gaitspeed-lang@failure: "{%0}는 잘못된 언어명입니다"
 command-gaitspeed-lang@aliases: ["language"]
 
 command-gaitspeed-reload: "reload"
 command-gaitspeed-reload@usage: "/gaitspeed Reload"
-command-gaitspeed-reload@success: "모든 데이터를 불러왔습니다."
+command-gaitspeed-reload@success: "모든 데이터를 불러왔습니다"
 command-gaitspeed-reload@aliases: ["rl"]
 
 command-gaitspeed-save: "save"
 command-gaitspeed-save@usage: "/gaitspeed Save"
-command-gaitspeed-save@success: "모든 데이터를 저장했습니다."
+command-gaitspeed-save@success: "모든 데이터를 저장했습니다"
 command-gaitspeed-save@aliases: ["sv"]
 ...
