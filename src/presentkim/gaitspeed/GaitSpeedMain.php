@@ -28,16 +28,9 @@ class GaitSpeedMain extends PluginBase{
 
     public function onLoad(){
         if (self::$instance === null) {
-            // register instance
             self::$instance = $this;
-
-            // load utils
             $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
 
-            // load default lang
-            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
-
-            // Dispose of existing data
             $sqlite3Path = "{$this->getDataFolder()}data.sqlite3";
             if (file_exists($sqlite3Path)) {
                 extensionLoad('sqlite3');
@@ -56,13 +49,12 @@ class GaitSpeedMain extends PluginBase{
                 unset($db, $results, $result);
                 unlink($sqlite3Path);
             }
+            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
         }
     }
 
     public function onEnable(){
         $this->load();
-
-        // register event listeners
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
     }
 
@@ -78,7 +70,6 @@ class GaitSpeedMain extends PluginBase{
 
         $this->reloadConfig();
 
-        // load lang
         $langfilename = $dataFolder . 'lang.yml';
         if (!file_exists($langfilename)) {
             $resource = $this->getResource('lang/eng.yml');
@@ -89,13 +80,10 @@ class GaitSpeedMain extends PluginBase{
             Translation::load($langfilename);
         }
 
-        // unregister commands
         foreach ($this->commands as $command) {
             $this->getServer()->getCommandMap()->unregister($command);
         }
         $this->commands = [];
-
-        // register commands
         $this->registerCommand(new CommandListener($this), Translation::translate('command-gaitspeed'), 'GaitSpeed', 'gaitspeed.cmd', Translation::translate('command-gaitspeed@description'), Translation::translate('command-gaitspeed@usage'), Translation::getArray('command-gaitspeed@aliases'));
     }
 
@@ -105,7 +93,6 @@ class GaitSpeedMain extends PluginBase{
             mkdir($dataFolder, 0777, true);
         }
 
-        // save db
         $this->saveConfig();
     }
 
