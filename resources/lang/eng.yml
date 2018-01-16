@@ -6,39 +6,41 @@ command-generic-failure@invalid : "{%0} is invalid value"
 command-generic-failure@invalid-player: "{%0} is invalid player name"
 
 command-gaitspeed: "gaitspeed"
-command-gaitspeed@usage: "/GaitSpeed <set | default | list | lang | reload | save>"
+command-gaitspeed@usage: "/gaitspeed <set | default | list | lang | reload | save>"
 command-gaitspeed@description: "Main command of GaitSpeed"
 command-gaitspeed@aliases: ["gs"]
 
 command-gaitspeed-default: "default"
-command-gaitspeed-default@usage: "/GaitSpeed Default <speed percent>"
+command-gaitspeed-default@usage: "/gaitspeed Default <speed percent>"
 command-gaitspeed-default@success: "Default speed was setted to {%0}"
 command-gaitspeed-default@aliases: ["d"]
 
 command-gaitspeed-set: "set"
-command-gaitspeed-set@usage: "/GaitSpeed Set <player name> <speed percent>"
+command-gaitspeed-set@usage: "/gaitspeed Set <player name> <speed percent>"
 command-gaitspeed-set@success-set: "{%0}'s speed was setted to {%1}"
 command-gaitspeed-set@success-default: "{%0}'s speed setting was removed"
 command-gaitspeed-set@failure-default: "{%0} is default value"
 command-gaitspeed-set@aliases: ["s"]
 
 command-gaitspeed-list: "list"
-command-gaitspeed-list@usage: "/GaitSpeed List <Page>"
+command-gaitspeed-list@usage: "/gaitspeed List <Page>"
 command-gaitspeed-list@head: "--- List (page {%0} of {%1}) ---"
 command-gaitspeed-list@item: " - {%0} => {%1}"
 command-gaitspeed-list@aliases: ["l"]
 
 command-gaitspeed-lang: "lang"
-command-gaitspeed-lang@usage: "/GaitSpeed Lang <language prefix>"
+command-gaitspeed-lang@usage: "/gaitspeed Lang <language prefix>"
 command-gaitspeed-lang@success: "{%0} language file was loaded"
 command-gaitspeed-lang@failure: "{%0} is invalid language prefix"
 command-gaitspeed-lang@aliases: ["language"]
 
 command-gaitspeed-reload: "reload"
+command-gaitspeed-reload@usage: "/gaitspeed Reload"
 command-gaitspeed-reload@success: "All data was reloaded"
 command-gaitspeed-reload@aliases: ["rl"]
 
 command-gaitspeed-save: "save"
+command-gaitspeed-save@usage: "/gaitspeed Save"
 command-gaitspeed-save@success: "All data was saved"
 command-gaitspeed-save@aliases: ["sv"]
 ...
