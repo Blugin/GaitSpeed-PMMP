@@ -30,6 +30,7 @@ class GaitSpeedMain extends PluginBase{
         if (self::$instance === null) {
             self::$instance = $this;
             $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
+            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
 
             $sqlite3Path = "{$this->getDataFolder()}data.sqlite3";
             if (file_exists($sqlite3Path)) {
@@ -49,7 +50,6 @@ class GaitSpeedMain extends PluginBase{
                 unset($db, $results, $result);
                 unlink($sqlite3Path);
             }
-            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
         }
     }
 
