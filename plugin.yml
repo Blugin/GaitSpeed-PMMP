@@ -9,22 +9,23 @@ permissions:
   gaitspeed.cmd:
     description:  GaitSpeed main command
     default:      op
-  gaitspeed.default.cmd:
-    description:  GaitSpeed default command
-    default:      op
-  gaitspeed.set.cmd:
-    description:  GaitSpeed set command
-    default:      op
-  gaitspeed.list.cmd:
-    description:  GaitSpeed list command
-    default:      op
-  gaitspeed.lang.cmd:
-    description:  GaitSpeed lang command
-    default:      op
-  gaitspeed.reload.cmd:
-    description:  GaitSpeed reload command
-    default:      op
-  gaitspeed.save.cmd:
-    description:  GaitSpeed save command
-    default:      op
+    children:
+      gaitspeed.cmd.default:
+        description:  GaitSpeed command - default
+        default:      op
+      gaitspeed.cmd.set:
+        description:  GaitSpeed command - set
+        default:      op
+      gaitspeed.cmd.list:
+        description:  GaitSpeed command - list
+        default:      op
+      gaitspeed.cmd.lang:
+        description:  GaitSpeed command - lang
+        default:      op
+      gaitspeed.cmd.reload:
+        description:  GaitSpeed command - reload
+        default:      op
+      gaitspeed.cmd.save:
+        description:  GaitSpeed command - save
+        default:      op
 ...
