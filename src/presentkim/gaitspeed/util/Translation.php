@@ -2,7 +2,7 @@
 
 namespace presentkim\gaitspeed\util;
 
-use presentkim\gaitspeed\GaitSpeedMain as Plugin;
+use presentkim\gaitspeed\GaitSpeed as Plugin;
 
 class Translation{
 

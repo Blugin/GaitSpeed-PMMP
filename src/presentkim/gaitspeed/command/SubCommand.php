@@ -4,7 +4,7 @@ namespace presentkim\gaitspeed\command;
 
 use pocketmine\command\CommandSender;
 use presentkim\gaitspeed\{
-  GaitSpeedMain as Plugin, util\Translation
+  GaitSpeed as Plugin, util\Translation
 };
 use function presentkim\gaitspeed\util\in_arrayi;
 

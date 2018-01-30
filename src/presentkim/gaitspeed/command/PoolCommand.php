@@ -7,7 +7,7 @@ use pocketmine\command\{
   Command, CommandExecutor, CommandSender, PluginCommand
 };
 use presentkim\gaitspeed\util\Translation;
-use presentkim\gaitspeed\GaitSpeedMain as Plugin;
+use presentkim\gaitspeed\GaitSpeed as Plugin;
 
 class PoolCommand extends PluginCommand implements CommandExecutor{
 

@@ -4,7 +4,7 @@ namespace presentkim\gaitspeed\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeedMain as Plugin, command\SubCommand
+  command\PoolCommand, GaitSpeed as Plugin, command\SubCommand
 };
 
 class SaveSubCommand extends SubCommand{

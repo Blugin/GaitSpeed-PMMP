@@ -12,7 +12,7 @@ use presentkim\gaitspeed\command\subcommands\{
   DefaultSubCommand, SetSubCommand, ListSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
 
-class GaitSpeedMain extends PluginBase{
+class GaitSpeed extends PluginBase{
 
     /** @var self */
     private static $instance = null;

@@ -5,7 +5,7 @@ namespace presentkim\gaitspeed\command\subcommands;
 use pocketmine\command\CommandSender;
 use pocketmine\Server;
 use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeedMain as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand
 };
 use function presentkim\gaitspeed\util\toInt;
 
