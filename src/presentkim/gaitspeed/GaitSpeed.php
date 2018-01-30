@@ -2,15 +2,15 @@
 
 namespace presentkim\gaitspeed;
 
-use pocketmine\entity\Attribute;
 use pocketmine\Player;
+use pocketmine\entity\Attribute;
 use pocketmine\plugin\PluginBase;
-use presentkim\gaitspeed\util\Translation;
-use presentkim\gaitspeed\listener\PlayerEventListener;
 use presentkim\gaitspeed\command\PoolCommand;
 use presentkim\gaitspeed\command\subcommands\{
   DefaultSubCommand, SetSubCommand, ListSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
+use presentkim\gaitspeed\listener\PlayerEventListener;
+use presentkim\gaitspeed\util\Translation;
 
 class GaitSpeed extends PluginBase{
 

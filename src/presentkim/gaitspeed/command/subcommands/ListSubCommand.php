@@ -2,11 +2,13 @@
 
 namespace presentkim\gaitspeed\command\subcommands;
 
-use pocketmine\command\CommandSender;
 use pocketmine\Server;
-use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeed as Plugin, command\SubCommand, util\Utils
+use pocketmine\command\CommandSender;
+use presentkim\gaitspeed\GaitSpeed as Plugin;
+use presentkim\gaitspeed\command\{
+  PoolCommand, SubCommand
 };
+use presentkim\gaitspeed\util\Utils;
 
 class ListSubCommand extends SubCommand{
 

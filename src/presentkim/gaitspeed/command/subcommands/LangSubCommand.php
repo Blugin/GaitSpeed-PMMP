@@ -3,9 +3,11 @@
 namespace presentkim\gaitspeed\command\subcommands;
 
 use pocketmine\command\CommandSender;
-use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand
+use presentkim\gaitspeed\GaitSpeed as Plugin;
+use presentkim\gaitspeed\command\{
+  PoolCommand, SubCommand
 };
+use presentkim\gaitspeed\util\Translation;
 
 class LangSubCommand extends SubCommand{
 

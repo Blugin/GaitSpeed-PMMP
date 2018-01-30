@@ -2,8 +2,9 @@
 
 namespace presentkim\gaitspeed\listener;
 
-use pocketmine\event\{
-  Listener, player\PlayerJoinEvent, player\PlayerMoveEvent, player\PlayerRespawnEvent
+use pocketmine\event\Listener;
+use pocketmine\event\player\{
+  PlayerJoinEvent, PlayerMoveEvent, PlayerRespawnEvent
 };
 use presentkim\gaitspeed\GaitSpeed as Plugin;
 

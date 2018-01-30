@@ -3,8 +3,9 @@
 namespace presentkim\gaitspeed\command;
 
 use pocketmine\command\CommandSender;
-use presentkim\gaitspeed\{
-  GaitSpeed as Plugin, util\Translation, util\Utils
+use presentkim\gaitspeed\GaitSpeed as Plugin;
+use presentkim\gaitspeed\util\{
+  Translation, Utils
 };
 
 abstract class SubCommand{
