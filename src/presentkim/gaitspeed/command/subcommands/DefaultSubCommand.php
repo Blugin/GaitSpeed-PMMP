@@ -4,9 +4,8 @@ namespace presentkim\gaitspeed\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand, util\Utils
 };
-use function presentkim\gaitspeed\util\toInt;
 
 class DefaultSubCommand extends SubCommand{
 
@@ -22,7 +21,7 @@ class DefaultSubCommand extends SubCommand{
      */
     public function onCommand(CommandSender $sender, array $args) : bool{
         if (isset($args[0])) {
-            $default = toInt($args[0], null, function (int $i){
+            $default = Utils::toInt($args[0], null, function (int $i){
                 return $i >= 0;
             });
             if ($default === null) {

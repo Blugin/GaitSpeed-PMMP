@@ -5,9 +5,8 @@ namespace presentkim\gaitspeed\command\subcommands;
 use pocketmine\command\CommandSender;
 use pocketmine\Server;
 use presentkim\gaitspeed\{
-  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, GaitSpeed as Plugin, util\Translation, command\SubCommand, util\Utils
 };
-use function presentkim\gaitspeed\util\toInt;
 
 class SetSubCommand extends SubCommand{
 
@@ -31,7 +30,7 @@ class SetSubCommand extends SubCommand{
             if ($player === null && !$exists) {
                 $sender->sendMessage(Plugin::$prefix . Translation::translate('command-generic-failure@invalid-player', $args[0]));
             } else {
-                $speed = toInt($args[1], null, function (int $i){
+                $speed = Utils::toInt($args[1], null, function (int $i){
                     return $i >= 0;
                 });
                 if ($speed === null) {
