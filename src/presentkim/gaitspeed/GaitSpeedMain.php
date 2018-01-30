@@ -24,11 +24,11 @@ class GaitSpeedMain extends PluginBase{
     private $command;
 
     /** @return self */
-    public static function getInstance(){
+    public static function getInstance() : self{
         return self::$instance;
     }
 
-    public function onLoad(){
+    public function onLoad() : void{
         if (self::$instance === null) {
             self::$instance = $this;
             $this->getServer()->getLoader()->loadClass('presentkim\gaitspeed\util\Utils');
@@ -36,16 +36,16 @@ class GaitSpeedMain extends PluginBase{
         }
     }
 
-    public function onEnable(){
+    public function onEnable() : void{
         $this->load();
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
     }
 
-    public function onDisable(){
+    public function onDisable() : void{
         $this->save();
     }
 
-    public function load(){
+    public function load() : void{
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
@@ -67,7 +67,7 @@ class GaitSpeedMain extends PluginBase{
         $this->reloadCommand();
     }
 
-    public function save(){
+    public function save() : void{
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
@@ -76,7 +76,7 @@ class GaitSpeedMain extends PluginBase{
         $this->saveConfig();
     }
 
-    public function reloadCommand(){
+    public function reloadCommand() : void{
         if ($this->command == null) {
             $this->command = new PoolCommand($this, 'gaitspeed');
             $this->command->createSubCommand(DefaultSubCommand::class);
@@ -97,7 +97,7 @@ class GaitSpeedMain extends PluginBase{
     /**
      * @param Player $player
      */
-    public function applyTo(Player $player){
+    public function applyTo(Player $player) : void{
         $configData = $this->getConfig()->getAll();
         $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue(($configData['playerData'][$player->getLowerCaseName()] ?? $configData['default-speed']) * 0.001);
     }

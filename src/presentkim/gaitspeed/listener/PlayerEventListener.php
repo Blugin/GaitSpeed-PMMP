@@ -25,17 +25,17 @@ class PlayerEventListener implements Listener{
     }
 
     /** @param PlayerJoinEvent $event */
-    public function onPlayerJoinEvent(PlayerJoinEvent $event){
+    public function onPlayerJoinEvent(PlayerJoinEvent $event) : void{
         $this->owner->applyTo($event->getPlayer());
     }
 
     /** @param PlayerRespawnEvent $event */
-    public function onPlayerRespawnEvent(PlayerRespawnEvent $event){
+    public function onPlayerRespawnEvent(PlayerRespawnEvent $event) : void{
         $this->apply[$event->getPlayer()->getName()] = true;
     }
 
     /** @param PlayerMoveEvent $event */
-    public function onPlayerMoveEvent(PlayerMoveEvent $event){
+    public function onPlayerMoveEvent(PlayerMoveEvent $event) : void{
         $player = $event->getPlayer();
         $playerName = $player->getName();
         if (isset($this->apply[$playerName])) {

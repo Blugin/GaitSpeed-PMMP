@@ -19,7 +19,7 @@ class LangSubCommand extends SubCommand{
      *
      * @return bool
      */
-    public function onCommand(CommandSender $sender, array $args){
+    public function onCommand(CommandSender $sender, array $args) : bool{
         if (isset($args[0]) && is_string($args[0]) && ($args[0] = strtolower(trim($args[0])))) {
             $resource = $this->plugin->getResource("lang/$args[0].yml");
             if (is_resource($resource)) {
@@ -32,7 +32,7 @@ class LangSubCommand extends SubCommand{
                 fclose($fp);
                 Translation::loadFromContents($contents);
                 $this->plugin->reloadCommand();
-                
+
                 $sender->sendMessage(Plugin::$prefix . $this->translate('success', $args[0]));
             } else {
                 $sender->sendMessage(Plugin::$prefix . $this->translate('failure', $args[0]));
