@@ -6,7 +6,8 @@ command-generic-failure@invalid : "{%0}는 잘못된 값입니다"
 command-generic-failure@invalid-player: "{%0}는 잘못된 플레이어 명입니다"
 
 command-gaitspeed: "gaitspeed"
-command-gaitspeed@usage: "/gaitspeed <set | default | list | lang | reload | save>"
+command-gaitspeed@usage: "/gaitspeed <{%0}>"
+command-gaitspeed@usage-separator: " | "
 command-gaitspeed@description: "GaitSpeed 메인 명령어"
 command-gaitspeed@aliases: ["gs"]
 
