@@ -75,3 +75,10 @@ Main command : `/gaitspeed <default | set | list | lang | reload | save>`
 - \[Fixed\] Violation of PSR-0
 - \[Changed\] Add return type hint
 - \[Changed\] Rename main class to GaitSpeed
+  
+  
+---
+### v1.2.2 [![Source](https://img.shields.io/badge/source-v1.2.2-blue.png?label=source)](https://github.com/PMMPPlugin/DustBin/tree/v1.2.2) [![Release](https://img.shields.io/github/downloads/PMMPPlugin/DustBin/v1.2.2/total.png?label=download&colorB=1fadad)](https://github.com/PMMPPlugin/DustBin/releases/v1.2.2)
+- \[Added\] Add PluginCommand getter and setter
+- \[Added\] Add getters and setters to SubCommand
+- \[Fixed\] Add api 3.0.0-ALPHA11
