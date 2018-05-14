@@ -3,7 +3,6 @@
 [![icon/192x192](meta/icon/192x192.png?raw=true)]()
 
 [![License](https://img.shields.io/github/license/PMMPPlugin/GaitSpeed.svg?label=License)](LICENSE)
-[![Poggit](https://poggit.pmmp.io/ci.shield/PMMPPlugin/GaitSpeed/GaitSpeed)](https://poggit.pmmp.io/ci/PMMPPlugin/GaitSpeed)
 [![Release](https://img.shields.io/github/release/PMMPPlugin/GaitSpeed.svg?label=Release)](https://github.com/PMMPPlugin/GaitSpeed/releases/latest)
 [![Download](https://img.shields.io/github/downloads/PMMPPlugin/GaitSpeed/total.svg?label=Download)](https://github.com/PMMPPlugin/GaitSpeed/releases/latest)
 
